@@ -1,12 +1,9 @@
 package com.erkebaev.spring.rest.controller;
 
 import com.erkebaev.spring.rest.entity.Employee;
-import com.erkebaev.spring.rest.exception_handling.EmployeeIncorrectData;
 import com.erkebaev.spring.rest.exception_handling.NoSuchEmployeeException;
 import com.erkebaev.spring.rest.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,23 +37,5 @@ public class MyRestController {
         }
 
         return employee;
-    }
-
-    // показывает информативную ошибку в виде 'json' для 'NoSuchEmployeeException'
-    @ExceptionHandler
-    public ResponseEntity<EmployeeIncorrectData> handlerException(NoSuchEmployeeException exception) {
-        EmployeeIncorrectData data = new EmployeeIncorrectData();
-        data.setInfo(exception.getMessage());
-
-        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
-    }
-
-    // показывает информативную ошибку в виде 'json' для всех Exception
-    @ExceptionHandler
-    public ResponseEntity<EmployeeIncorrectData> handlerException(Exception exception) {
-        EmployeeIncorrectData data = new EmployeeIncorrectData();
-        data.setInfo(exception.getMessage());
-
-        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
     }
 }
