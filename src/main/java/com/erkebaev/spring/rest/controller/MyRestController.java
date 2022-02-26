@@ -38,4 +38,14 @@ public class MyRestController {
 
         return employee;
     }
+
+    // Добавляем нового сотрудника
+    // PostMapping ссылается на страницу employees
+    @PostMapping("/employees")
+    public Employee addNewEmployee(@RequestBody Employee employee) {
+        // добавляем сотрудника
+        employeeService.saveEmployee(employee);
+
+        return employee;
+    }
 }
